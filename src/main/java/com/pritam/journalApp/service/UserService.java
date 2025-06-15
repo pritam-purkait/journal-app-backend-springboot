@@ -56,6 +56,12 @@ public class UserService {
     public User getByUserName(String userName) {
         return ur.findByUserName(userName);
     }
+
+    public void saveAdmin(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(Arrays.asList("USER","ADMIN"));
+        ur.save(user);
+    }
 }
 /*
 * CONTROLLER -->
