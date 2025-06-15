@@ -29,6 +29,7 @@ public class User {
     @DBRef
     private List<JournalEntry> journalEntries = new ArrayList<>();
 
+    private List<String> roles;
 }
 
 /*journalEntries field will contain a list of journal entries for each user

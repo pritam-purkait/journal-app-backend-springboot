@@ -29,9 +29,7 @@ public class JournalEntryService {
         journalEntry.setDate(LocalDateTime.now());
         JournalEntry saved = journalEntryRepository.save(journalEntry);
         user.getJournalEntries().add(saved);
-
-
-        userService.saveEntry(user);
+        userService.saveUser(user);
     }
 
     public void saveEntry(JournalEntry journalEntry) {
@@ -47,12 +45,26 @@ public class JournalEntryService {
         return journalEntryRepository.findById(id);
     }
 
-    public void deleteJournalEntryById(ObjectId id, String userName) {
-        User user = userService.getByUserName(userName);
-        user.getJournalEntries().removeIf(x -> x.getId().equals(id));
-        userService.saveEntry(user);
-        journalEntryRepository.deleteById(id);
+    @Transactional
+    public boolean deleteJournalEntryById(ObjectId id, String userName) {
+
+        boolean removed = false;
+        try {
+            User user = userService.getByUserName(userName);
+             removed = user.getJournalEntries().removeIf(x -> x.getId().equals(id));
+            if(removed){
+                userService.saveUser(user);
+                journalEntryRepository.deleteById(id);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+            throw new RuntimeException("Error while deleting Journal Entry");
+        }
+        return removed;
     }
+
+
+
 }
 /*
 * CONTROLLER -->
