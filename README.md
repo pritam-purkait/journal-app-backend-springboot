@@ -35,7 +35,7 @@ Journal App is a web-based journaling application that allows users to create an
 2. Create a new cluster
 3. In the cluster, click on "Connect" and choose "Connect your application"
 4. Copy the connection string
-5. Add your connection string in `application.properties` file in `src/main/resources` 
+5. Add your connection string in `.env` file in `root` 
 
 **Important**: Replace `your_mongodb_atlas_uri_here` with your actual MongoDB Atlas URI. Never commit the actual URI to version control.
 
