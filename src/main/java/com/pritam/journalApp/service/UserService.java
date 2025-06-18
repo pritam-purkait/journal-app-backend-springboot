@@ -1,8 +1,6 @@
 package com.pritam.journalApp.service;
 
-import com.pritam.journalApp.entity.JournalEntry;
 import com.pritam.journalApp.entity.User;
-import com.pritam.journalApp.repository.JournalEntryRepository;
 import com.pritam.journalApp.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
