@@ -17,8 +17,8 @@ public class JournalAppApplication {
     public static void main(String[] args) {
 
 		Dotenv dotenv = Dotenv.configure()
-				.directory("./")
-				.load();
+				.ignoreIfMissing()    // ← skip if no .env
+				.load();	
 
 
 		System.setProperty("MONGODB_URI", dotenv.get("MONGODB_URI"));

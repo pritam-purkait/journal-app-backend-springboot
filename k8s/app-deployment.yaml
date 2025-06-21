@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-app
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-app
+  template:
+    metadata:
+      labels:
+        app: springboot-app
+    spec:
+      # ← this “spec:” is required
+      initContainers:
+      - name: wait-for-mongo
+        image: busybox:1.35
+        command:
+        - sh
+        - -c
+        - |
+          until nc -z mongo 27017; do
+            echo "waiting for mongo…"
+            sleep 2
+          done
+
+      imagePullSecrets:
+      - name: ghcr-secret
+
+      containers:
+      - name: springboot-app
+        image: ghcr.io/andrew99xx/my-app/springboot-mongo:latest
+        imagePullPolicy: Always
+        env:
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongo-creds
+              key: username
+        - name: MONGO_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mongo-creds
+              key: password
+        - name: MONGODB_URI
+          value: mongodb://$(MONGO_USER):$(MONGO_PASS)@mongo:27017/mydatabase?authSource=admin
+        ports:
+        - containerPort: 8080
