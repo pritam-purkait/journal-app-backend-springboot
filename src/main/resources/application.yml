@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev
+
+#logging:
+#  level:
+#    com:
+#      pritam:
+#        journalApp: DEBUG
+
+#TRACE --> DEBUG --> INFO --> WARN --> ERROR

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: "Journal App"
+
+  data:
+    mongodb:
+      uri: ${        }
+      database: journaldb
+      auto-index-creation: true
+
+server:
+  servlet:
+    context-path: /api
+  port: 8081
