@@ -1,10 +1,14 @@
 package com.pritam.journalApp.controller;
 
 
+import com.pritam.journalApp.api.response.QuoteResponse;
+import com.pritam.journalApp.api.response.WeatherResponse;
 import com.pritam.journalApp.entity.User;
 
+import com.pritam.journalApp.service.QuoteService;
 import com.pritam.journalApp.service.UserService;
 
+import com.pritam.journalApp.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,17 +28,23 @@ public class UserControllerMongodb {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private WeatherService weatherService;
 
-    @GetMapping
-    public ResponseEntity<?> getUsers() {
+    @Autowired
+    private QuoteService quoteService;
 
-        List<User> all = userService.getAll();
 
-        if (all != null && !all.isEmpty()) {
-            return new ResponseEntity<>(all,HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+//    @GetMapping
+//    public ResponseEntity<?> getUsers() {
+//
+//        List<User> all = userService.getAll();
+//
+//        if (all != null && !all.isEmpty()) {
+//            return new ResponseEntity<>(all,HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }
 
     //working fine
     @PutMapping
@@ -61,5 +71,23 @@ public class UserControllerMongodb {
 
         userService.deleteByUserName(authentication.getName());
        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> greetings(){
+
+        Authentication authentication = SecurityContextHolder
+                                         .getContext()
+                                         .getAuthentication();
+        WeatherResponse weatherResponse = weatherService.getWeather("Kolkata");
+        QuoteResponse quoteResponse = quoteService.getQuote();
+        String greeting = "Hiee " + authentication.getName() + " >_<  ";
+        String quote = " ";
+        if(weatherResponse != null || quoteResponse != null){
+            quote = quoteResponse.getText()+" ~ "+quoteResponse.getAuthor() ;
+            greeting = greeting +"\n" +" Temp -> "+weatherResponse.getCurrent().getTempC()+"℃ "+"weather feels like "+weatherResponse.getCurrent().getFeelslike()+"℃ .";
+        }
+
+        return new ResponseEntity<>(greeting+"\n"+quote , HttpStatus.OK);
     }
 }
