@@ -71,8 +71,5 @@ public class JournalEntryService {
 
 }
 /*
-* CONTROLLER -->
-*           SERVICE -->
-*               REPOSITORY .
-*
+* CONTROLLER --> SERVICE --> REPOSITORY
 */

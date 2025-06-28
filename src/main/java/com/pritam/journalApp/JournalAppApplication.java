@@ -28,7 +28,7 @@ public class JournalAppApplication {
 
 		ConfigurableApplicationContext context = SpringApplication.run(JournalAppApplication.class, args);
 		ConfigurableEnvironment environment =context.getEnvironment();
-		System.out.println(environment.getActiveProfiles()[0]);
+		System.out.println("Running Profiles ->"+environment.getActiveProfiles()[0]);
 
 		//SpringApplication.run(JournalAppApplication.class, args);
 	}
