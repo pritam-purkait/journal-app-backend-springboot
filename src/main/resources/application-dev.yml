@@ -2,13 +2,33 @@ spring:
   application:
     name: "Journal App"
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable:
+  redis:
+    host: localhost
+    port: 6379
   data:
     mongodb:
-      uri: ${MONGODB_URI}
-      database: journaldb
-      auto-index-creation: true
+          uri: ${MONGODB_URI}
+          database: journaldb
+          auto-index-creation: true
+
+
 
 server:
   servlet:
     context-path: /journal
   port: 8080
+
+#  ${MONGODB_URI}
+#  ${MAIL_USERNAME}
+#  ${MAIL_PASSWORD}

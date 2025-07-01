@@ -35,17 +35,6 @@ public class UserControllerMongodb {
     private QuoteService quoteService;
 
 
-//    @GetMapping
-//    public ResponseEntity<?> getUsers() {
-//
-//        List<User> all = userService.getAll();
-//
-//        if (all != null && !all.isEmpty()) {
-//            return new ResponseEntity<>(all,HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
-
     //working fine
     @PutMapping
     public ResponseEntity<?> updateUser

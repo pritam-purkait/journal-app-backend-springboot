@@ -39,7 +39,7 @@ public class JournalEntryControllerMongodb {
         if (all != null && !all.isEmpty()) {
                 return new ResponseEntity<>(all,HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("No journal entries of this user :(",HttpStatus.NOT_FOUND);
     }
     //working fine
     @PostMapping

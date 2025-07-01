@@ -23,12 +23,22 @@ public class QuoteService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private RedisService redisService;
+
     public QuoteResponse getQuote() {
-
-        String finalApi=API_URL;
-        ResponseEntity<QuoteResponse> response =restTemplate.exchange(finalApi, HttpMethod.GET,null, QuoteResponse.class );
-        return response.getBody();
-
+        QuoteResponse quoteResponse = redisService.get("today's_quote", QuoteResponse.class);
+        if(quoteResponse != null){
+            return quoteResponse;
+        }else{
+            String finalApi=API_URL;
+            ResponseEntity<QuoteResponse> response =restTemplate.exchange(finalApi, HttpMethod.GET,null, QuoteResponse.class );
+            QuoteResponse body = response.getBody();
+            if(body != null){
+                redisService.set("today's_quote", body, 1440);
+            }
+            return body;
+        }
     }
 
 }
