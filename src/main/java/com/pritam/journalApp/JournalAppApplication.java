@@ -30,6 +30,10 @@ public class JournalAppApplication {
 		System.setProperty("MONGODB_URI", dotenv.get("MONGODB_URI"));
 		System.setProperty("MAIL_USERNAME", dotenv.get("MAIL_USERNAME"));
 		System.setProperty("MAIL_PASSWORD", dotenv.get("MAIL_PASSWORD"));
+		System.setProperty("REDIS_HOST", dotenv.get("REDIS_HOST"));
+		System.setProperty("REDIS_PORT", dotenv.get("REDIS_PORT"));
+		System.setProperty("REDIS_PASSWORD", dotenv.get("REDIS_PASSWORD"));
+
 
 		ConfigurableApplicationContext context = SpringApplication.run(JournalAppApplication.class, args);
 		ConfigurableEnvironment environment =context.getEnvironment();

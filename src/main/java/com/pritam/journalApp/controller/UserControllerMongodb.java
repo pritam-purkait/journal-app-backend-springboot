@@ -73,8 +73,8 @@ public class UserControllerMongodb {
         String greeting = "Hiee " + authentication.getName() + " >_<  ";
         String quote = " ";
         if(weatherResponse != null || quoteResponse != null){
-            quote = quoteResponse.getText()+" ~ "+quoteResponse.getAuthor() ;
-            greeting = greeting +"\n" +" Temp -> "+weatherResponse.getCurrent().getTempC()+"℃ "+"weather feels like "+weatherResponse.getCurrent().getFeelslike()+"℃ .";
+            quote = quoteResponse.getText()+" ~ "+quoteResponse.getAuthor() + "\n" ;
+            greeting = greeting +"\n" +" Temp is "+weatherResponse.getCurrent().getTempC()+"℃ "+"weather feels like "+weatherResponse.getCurrent().getFeelslike()+"℃ .";
         }
 
         return new ResponseEntity<>(greeting+"\n"+quote , HttpStatus.OK);
