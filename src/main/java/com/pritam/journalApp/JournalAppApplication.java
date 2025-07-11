@@ -1,6 +1,7 @@
 package com.pritam.journalApp;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableScheduling
+@Slf4j
 public class JournalAppApplication {
 
 
@@ -33,13 +35,13 @@ public class JournalAppApplication {
 		System.setProperty("REDIS_HOST", dotenv.get("REDIS_HOST"));
 		System.setProperty("REDIS_PORT", dotenv.get("REDIS_PORT"));
 		System.setProperty("REDIS_PASSWORD", dotenv.get("REDIS_PASSWORD"));
+		System.setProperty("JWT_SECRET", dotenv.get("SECRET_KEY"));
 
 
 		ConfigurableApplicationContext context = SpringApplication.run(JournalAppApplication.class, args);
 		ConfigurableEnvironment environment =context.getEnvironment();
-		System.out.println("Running Profiles ->"+environment.getActiveProfiles()[0]);
+		log.info("Running Profiles ->"+environment.getActiveProfiles()[0]);
 
-		//SpringApplication.run(JournalAppApplication.class, args);
 	}
 
 	@Bean
