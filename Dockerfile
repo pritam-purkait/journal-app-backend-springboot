@@ -6,7 +6,7 @@ COPY .env .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# runtime stage
+# runt ime stage
 FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
