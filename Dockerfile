@@ -1,16 +1,13 @@
-# ── builder stage ─────────────────────────────────────
-FROM maven:3.8.7-openjdk-17-slim AS builder
+# build stage (choose one of the above)
+FROM maven:3.9-eclipse-temurin-17 AS builder
 WORKDIR /app
 COPY pom.xml .
+COPY .env .
 COPY src ./src
-RUN mvn clean package -DskipTests         \
-    && echo ">> built:" target/*.jar
+RUN mvn clean package -DskipTests
 
-# ── runtime stage ─────────────────────────────────────
-FROM openjdk:17-jdk-slim
+# runtime stage
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
-ARG JAR_NAME=*.jar
-# copy the jar from the builder stage into /app/app.jar
-COPY --from=builder /app/target/${JAR_NAME} app.jar
-
+COPY --from=builder /app/target/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app/app.jar"]
