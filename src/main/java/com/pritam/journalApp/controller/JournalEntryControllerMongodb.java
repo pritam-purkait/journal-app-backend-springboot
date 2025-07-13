@@ -4,6 +4,7 @@ import com.pritam.journalApp.entity.JournalEntry;
 import com.pritam.journalApp.entity.User;
 import com.pritam.journalApp.service.JournalEntryService;
 import com.pritam.journalApp.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/journal")
+@Tag(name = "Journal APIs", description = "Journal Entry Controller - getAllJournalEntriesOfUser, createJournalEntry, findJournalEntryById, deleteEntryId, updateJournalEntry")
 public class JournalEntryControllerMongodb {
 
     @Autowired

@@ -9,6 +9,7 @@ import com.pritam.journalApp.service.QuoteService;
 import com.pritam.journalApp.service.UserService;
 
 import com.pritam.journalApp.service.WeatherService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User APIs", description = "User Controller - greetings, updateUser, deleteUser")
 public class UserControllerMongodb {
 
     @Autowired
