@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     @GetMapping("/")
     public String home(){
-        return "redirect:/journal/swagger-ui/index.html";
+        return "redirect:https://journal-app-backend-springboot-obkk.onrender.com/journal/swagger-ui/index.html";
     }
 }
