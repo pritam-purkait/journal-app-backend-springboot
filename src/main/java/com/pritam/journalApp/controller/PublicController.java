@@ -33,7 +33,7 @@ public class PublicController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @GetMapping("/helth-check")
+    @GetMapping("/health-check")
     public String helthCheck() {
         return "ok.....";
     }
