@@ -9,6 +9,7 @@ import com.pritam.journalApp.service.QuoteService;
 import com.pritam.journalApp.service.UserService;
 
 import com.pritam.journalApp.service.WeatherService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,7 @@ public class UserControllerMongodb {
 
     //working fine
     @PutMapping
+    @Operation(summary = "Update a user by id")
     public ResponseEntity<?> updateUser
             (@RequestBody User user) {
 
@@ -55,6 +57,7 @@ public class UserControllerMongodb {
     }
     //working fine
     @DeleteMapping
+    @Operation(summary = "Delete a user by username")
     public ResponseEntity<?> deleteUser() {
         Authentication authentication = SecurityContextHolder
                                          .getContext()
@@ -65,6 +68,7 @@ public class UserControllerMongodb {
     }
 
     @GetMapping
+    @Operation(summary = "Greeting to users")
     public ResponseEntity<?> greetings(){
 
         Authentication authentication = SecurityContextHolder

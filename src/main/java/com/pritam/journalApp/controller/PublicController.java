@@ -4,6 +4,7 @@ import com.pritam.journalApp.Utils.JwtUtil;
 import com.pritam.journalApp.entity.User;
 import com.pritam.journalApp.service.UserDetailsServiceImpl;
 import com.pritam.journalApp.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,13 @@ public class PublicController {
     private JwtUtil jwtUtil;
 
     @GetMapping("/health-check")
+    @Operation(summary = "Health Check")
     public String helthCheck() {
         return "ok.....";
     }
 
     @PostMapping("/signup")
+    @Operation(summary = "Create a new user (username, password , email(optional), sentimentAnalysis(true/false)(optional))")
     public ResponseEntity<?> signup(@RequestBody User user) {
         try{
             userService.saveNewUser(user);
@@ -48,6 +51,7 @@ public class PublicController {
         }
     }
     @PostMapping("/login")
+    @Operation(summary = "Login (username, password)")
     public ResponseEntity<?> login(@RequestBody User user) {
         try {
             Authentication authenticate = authenticationManager.authenticate(

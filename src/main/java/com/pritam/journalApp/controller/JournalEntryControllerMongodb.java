@@ -4,6 +4,7 @@ import com.pritam.journalApp.entity.JournalEntry;
 import com.pritam.journalApp.entity.User;
 import com.pritam.journalApp.service.JournalEntryService;
 import com.pritam.journalApp.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class JournalEntryControllerMongodb {
 
     //working fine
     @GetMapping
+    @Operation(summary = "Get all journal entries of the current user")
     public ResponseEntity<?> getAllJournalEntriesOfUser() {
 
         Authentication authentication = SecurityContextHolder
@@ -45,6 +47,7 @@ public class JournalEntryControllerMongodb {
     }
     //working fine
     @PostMapping
+    @Operation(summary = "Create a new journal entry (title, content) ")
     public ResponseEntity<JournalEntry> createJournalEntry
             (@RequestBody JournalEntry myEntry) {
         try {
@@ -62,6 +65,7 @@ public class JournalEntryControllerMongodb {
     }
     //working fine
     @GetMapping("id/{myId}")
+    @Operation(summary = "Get a journal entry by id")
     public ResponseEntity<JournalEntry> findJournalEntryById
             (@PathVariable ObjectId myId) {
 
@@ -84,6 +88,7 @@ public class JournalEntryControllerMongodb {
     }
 
     @DeleteMapping("id/{myId}")
+    @Operation(summary = "Delete a journal entry by id")
     public  ResponseEntity<?> deleteEntryId
             (@PathVariable ObjectId myId) {
         Authentication authentication = SecurityContextHolder
@@ -98,6 +103,7 @@ public class JournalEntryControllerMongodb {
     }
 
     @PutMapping("id/{myId}")
+    @Operation(summary = "Update a journal entry by id")
     public ResponseEntity<?> updateJournalEntry(@RequestBody JournalEntry myEntry, @PathVariable ObjectId myId ) {
                 Authentication authentication = SecurityContextHolder
                         .getContext().getAuthentication();
