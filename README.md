@@ -1,6 +1,9 @@
 # Journal App
 
 A journal application backend built with Spring Boot and MongoDB.
+## API Documentation
+
+[link](https://journal-app-backend-springboot-obkk.onrender.com/journal/swagger-ui/index.html#/)
 
 ## Overview
 
