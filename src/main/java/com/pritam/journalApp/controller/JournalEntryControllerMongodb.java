@@ -67,7 +67,7 @@ public class JournalEntryControllerMongodb {
     @GetMapping("id/{myId}")
     @Operation(summary = "Get a journal entry by id")
     public ResponseEntity<JournalEntry> findJournalEntryById
-            (@PathVariable ObjectId myId) {
+            (@PathVariable String myId) {
 
         Authentication authentication = SecurityContextHolder
                 .getContext().getAuthentication();
@@ -90,7 +90,7 @@ public class JournalEntryControllerMongodb {
     @DeleteMapping("id/{myId}")
     @Operation(summary = "Delete a journal entry by id")
     public  ResponseEntity<?> deleteEntryId
-            (@PathVariable ObjectId myId) {
+            (@PathVariable String myId) {
         Authentication authentication = SecurityContextHolder
                 .getContext().getAuthentication();
         String userName = authentication.getName();
@@ -104,7 +104,7 @@ public class JournalEntryControllerMongodb {
 
     @PutMapping("id/{myId}")
     @Operation(summary = "Update a journal entry by id")
-    public ResponseEntity<?> updateJournalEntry(@RequestBody JournalEntry myEntry, @PathVariable ObjectId myId ) {
+    public ResponseEntity<?> updateJournalEntry(@RequestBody JournalEntry myEntry, @PathVariable String myId ) {
                 Authentication authentication = SecurityContextHolder
                         .getContext().getAuthentication();
                 String userName = authentication.getName();
@@ -122,7 +122,7 @@ public class JournalEntryControllerMongodb {
 
                         old.setTitle(myEntry.getTitle() != null  &&  !myEntry.getTitle().equals("")    ? myEntry.getTitle() : old.getTitle() );
                         old.setContent(myEntry.getContent() != null  &&  !myEntry.getContent().equals("")   ? myEntry.getContent() : old.getContent() );
-
+                        old.setSentiment(myEntry.getSentiment() != null  &&  !myEntry.getSentiment().equals("")   ? myEntry.getSentiment() : old.getSentiment());
                         journalEntryService.saveEntry( old );
                         return new ResponseEntity<>(old, HttpStatus.OK);
                     }

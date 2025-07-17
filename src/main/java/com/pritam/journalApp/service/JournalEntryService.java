@@ -45,13 +45,12 @@ public class JournalEntryService {
         return journalEntryRepository.findAll();
     }
 
-    public Optional<JournalEntry> getJournalEntryById(ObjectId id) {
+    public Optional<JournalEntry> getJournalEntryById(String id) {
         return journalEntryRepository.findById(id);
     }
 
     @Transactional
-    public boolean deleteJournalEntryById(ObjectId id, String userName) {
-
+    public boolean deleteJournalEntryById(String id, String userName) {
         boolean removed = false;
         try {
             User user = userService.getByUserName(userName);

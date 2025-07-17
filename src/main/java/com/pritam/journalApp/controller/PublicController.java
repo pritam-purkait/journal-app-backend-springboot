@@ -37,7 +37,7 @@ public class PublicController {
     @GetMapping("/health-check")
     @Operation(summary = "Health Check")
     public String helthCheck() {
-        return "ok.....";
+        return "Server is running.........";
     }
 
     @PostMapping("/signup")
